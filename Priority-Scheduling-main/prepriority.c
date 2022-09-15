@@ -1,0 +1,53 @@
+#include<stdio.h>
+int main()
+{
+    int n,i,at[10],bt[10],pr[10],ct[10],minat,pri,pos,total,count=0,tempat[10],temppr[10],tempbt[10];
+    printf("Enter the number of processes\n");
+    scanf("%d",&n);
+    printf("P\tAT\tBT\tPR\n");
+    for(i=0;i<n;i++)
+    {
+        printf("P%d\t",i+1);
+        scanf("%d %d %d",&at[i],&bt[i],&pr[i]);
+        tempat[i]=at[i];
+        temppr[i]=pr[i];
+        tempbt[i]=bt[i];
+    }
+    minat=99;
+    for(i=0;i<n;i++)
+    {
+        if(at[i]<minat)
+        minat=at[i];
+    }
+    total=minat;
+    pri=-1;
+    pos=-1;
+    while(count!=n)
+  {
+    for(i=0;i<n;i++)
+    {
+        if(at[i]<=total)
+        {
+            if(pr[i]>pri)
+            {
+                pri=pr[i];
+                pos=i;
+            }
+        }
+    }
+    total++;
+    bt[pos]--;
+    if(bt[pos]==0)
+    {
+    pr[pos]=-1;
+    at[pos]=99;
+    ct[pos]=total;
+    count++;}
+    pri=-1;
+  }
+  printf("P\tAT\tBT\tPR\tCT\tWT\tTAT\n");
+  for(i=0;i<n;i++)
+  {
+      printf("P%d\t%d\t%d\t%d\t%d\t%d\t%d\n",i+1,tempat[i],tempbt[i],temppr[i],ct[i],ct[i]-tempat[i]-tempbt[i],ct[i]-tempat[i]);
+  }
+}
